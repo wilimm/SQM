@@ -25,7 +25,7 @@ public class ApiTest extends T {
         ApiTest apiTest = new ApiTest();
         String res01 = apiTest.queryUserInfo(111, 17);
         System.out.println("测试结果：" + res01 + "\r\n");
-        String res02 = apiTest.queryUserInfoList("花花", 17, 20190103991L);
+        String res02 = apiTest.queryUserInfoList("花花", 17, 20190103991L, 0.1, 1L);
         System.out.println("测试结果：" + res02 + "\r\n");
     }
 
@@ -40,9 +40,9 @@ public class ApiTest extends T {
         return "哈哈哈被你抓到了";
     }
 
-    public String queryUserInfoList(String name, int age, long number) throws InterruptedException {
+    public String queryUserInfoList(String name, int age, long number, double d, long number2) throws InterruptedException {
         Thread.sleep(100);
-        return name + ":" + age + ":" + number;
+        return name + ":" + age + ":" + number + ":" + d;
     }
 
     public void queryUserInfoObj(int uId, int age, int[] req) throws InterruptedException {

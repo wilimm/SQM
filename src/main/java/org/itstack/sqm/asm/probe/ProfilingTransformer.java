@@ -28,7 +28,7 @@ public class ProfilingTransformer implements ClassFileTransformer {
         } catch (Throwable e) {
             System.out.println(e.getMessage());
         }
-        return classfileBuffer;
+        return null;
     }
 
     private byte[] getBytes(ClassLoader loader, String className, byte[] classfileBuffer) {
