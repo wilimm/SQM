@@ -26,7 +26,7 @@ public class ProfilingTransformer implements ClassFileTransformer {
 
             return bytes;
         } catch (Throwable e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -43,7 +43,10 @@ public class ProfilingTransformer implements ClassFileTransformer {
         // 输出类字节码
         FileOutputStream out = null;
         try {
-            String pathName = ProfilingTransformer.class.getResource("/").getPath() + className + "SQM.class";
+            String tmpdir = System.getProperty("java.io.tmpdir") + File.separator + "dumpClass";
+            String pathName = tmpdir + File.separator + className + "SQM.class";
+            File dir = new File(pathName.substring(0, pathName.lastIndexOf("/")));
+            dir.mkdirs();
             out = new FileOutputStream(new File(pathName));
             System.out.println("ASM类输出路径：" + pathName);
             out.write(bytes);

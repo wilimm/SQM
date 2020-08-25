@@ -13,6 +13,7 @@ public class ProfilingFilter {
 
         // 默认不注入的包
         exceptPackagePrefix.add("java/");
+        exceptPackagePrefix.add("jdk/");
         exceptPackagePrefix.add("javax/");
         exceptPackagePrefix.add("sun/");
         exceptPackagePrefix.add("com/sun/");
