@@ -108,10 +108,11 @@ public class ProfilingMethodVisitor extends AdviceAdapter {
                 } else if ("J".equals(type)) {
                     mv.visitVarInsn(LLOAD, ++cursor);  //获取对应的参数
                     mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;", false);
+                    ++cursor; // long 占用两个本地变量槽，所以还需要+1
                 } else if ("D".equals(type)) {
-                    cursor += 2;
-                    mv.visitVarInsn(DLOAD, cursor);  //获取对应的参数
+                    mv.visitVarInsn(DLOAD, ++cursor);  //获取对应的参数
                     mv.visitMethodInsn(INVOKESTATIC, "java/lang/Double", "valueOf", "(D)Ljava/lang/Double;", false);
+                    ++cursor; // double 占用两个本地变量槽，所以还需要+1
                 } else {
                     ++cursor;
                     mv.visitVarInsn(ALOAD, cursor);  //获取对应的参数
