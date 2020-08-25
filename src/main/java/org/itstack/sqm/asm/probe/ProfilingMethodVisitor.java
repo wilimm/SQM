@@ -3,6 +3,7 @@ package org.itstack.sqm.asm.probe;
 import org.itstack.sqm.base.MethodTag;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.AdviceAdapter;
 
@@ -31,6 +32,10 @@ public class ProfilingMethodVisitor extends AdviceAdapter {
         }
 
         methodId = ProfilingAspect.generateMethodId(new MethodTag(fullClassName, simpleClassName, methodName, desc, parameterTypeList, desc.substring(desc.lastIndexOf(')') + 1)));
+
+        if ((access & Opcodes.ACC_STATIC) > 0) {
+            cursor = -1; // 静态方法，不存储 this 指针（所以从 0 开始就是方法参数）
+        }
     }
 
     @Override
